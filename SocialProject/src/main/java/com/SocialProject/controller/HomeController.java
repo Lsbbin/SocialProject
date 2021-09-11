@@ -21,5 +21,20 @@ public class HomeController {
 	public String home() {
 		return "home";
 	}
+	// 홈으로
+	@RequestMapping("/home")
+	public String home1() {
+		return "home";
+	}
+	// 로그인 페이지
+	@RequestMapping("/loginForm")
+	public String loginForm() {
+		return "member/loginForm";
+	}
+	// 회원가입 페이지
+	@RequestMapping("/registForm")
+	public String registForm() {
+		return "member/registForm";
+	}
 	
 }
