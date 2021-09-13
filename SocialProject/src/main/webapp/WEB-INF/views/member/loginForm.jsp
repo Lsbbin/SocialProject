@@ -60,7 +60,7 @@
 			</tr>
 			<tr>
 				<th>비밀번호</th>
-				<td><input type="text" class="inp" name="userPw"></td>
+				<td><input type="password" class="inp" name="userPw"></td>
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align: center;">

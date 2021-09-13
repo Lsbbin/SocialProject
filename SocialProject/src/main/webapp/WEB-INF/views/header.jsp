@@ -36,7 +36,7 @@
 	
 	<nav style="background-color: 	darkgreen; color: white; top: 120px; width: 100%; height: 50px; position: fixed; line-height: 50px;">
 		<a href="home" style="margin-left: 20px;">홈으로</a>
-		<a href="#" style="margin-left: 20px;">게시판</a>
+		<a href="boardList" style="margin-left: 20px;">게시판</a>
 		
 		<c:choose>
 		<c:when test="${sessionScope.loginId == null }">

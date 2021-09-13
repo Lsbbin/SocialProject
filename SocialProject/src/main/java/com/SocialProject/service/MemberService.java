@@ -99,5 +99,30 @@ public class MemberService {
 		}
 		return mav;
 	}
+	// 프로필 사진 변경
+	public ModelAndView modImg(MemberDTO mdto, String profile) throws IllegalStateException, IOException {
+		ModelAndView mav = new ModelAndView();
+		MultipartFile mfile = mdto.getMfile();
+		
+		String userProfile = "";
+		String savePath = "C:\\Users\\82104\\Desktop\\SocialProject\\SocialProject\\SocialProject\\src\\main\\webapp\\resources\\profile";
+		
+		UUID uuid = UUID.randomUUID();
+		userProfile = uuid.toString()+"_"+mfile.getOriginalFilename();
+		mfile.transferTo(new File(savePath,userProfile));
+		
+		mdto.setUserProfile(userProfile);
+		int modImg = mdao.modImg(mdto);
+		
+		if(modImg > 0) {
+			File file = new File(savePath,profile);
+			file.delete();
+			mav.setViewName("home");
+		}else {
+			mav.addObject("msg", "변경 실패");
+			mav.setViewName("back");
+		}
+		return mav;
+	}
 
 }

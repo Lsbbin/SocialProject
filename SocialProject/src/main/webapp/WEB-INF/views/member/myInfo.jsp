@@ -80,15 +80,39 @@
 			</tr>
 		</table>
 		</form>
-		
+			<!-- 프로필사진 없을때 -->
+			<c:if test="${myInfo.userProfile == null }">
+				<div style="width: 50%; margin:auto;">
+					<h4 style="text-align: center; margin-bottom: 20px;">프로필 사진
+					<button class="btn1" id="ImgBtn" onclick="modImgBtnClick()">등록</button>
+					</h4> 
+				</div>
+				
+				<div style="width: 20%; margin:auto; height: 300px; margin-bottom: 20px;">
+				<form action="modImg" method="post" enctype="multipart/form-data" onsubmit="return modImgCheck()">
+				<input type="hidden" name="userId" value="${myInfo.userId }">
+					<input type="file" style="display: none; margin-left: 20%;" id="modImgInput" name="mfile">
+					<input type="submit" class="btn1" value="등록" style="display: none; margin-left: 40%; margin-top: 20px;" id="modImgBtn">
+				</form>
+				</div>
+			</c:if>
+			<!-- 프로필사진 있을때 -->
 			<c:if test="${myInfo.userProfile != null }">
 				<div style="width: 50%; margin:auto;">
-					<h4 style="text-align: center; margin-bottom: 20px;">프로필 사진<button class="btn1" style="">변경</button></h4> 
-				</div>
-				<div style="width: 20%; margin:auto; height: 300px; margin-bottom: 20px;">
-					<img src="resources/profile/${myInfo.userProfile }" style="width: 100%; height: 100%;">
+					<h4 style="text-align: center; margin-bottom: 20px;">프로필 사진
+					<button class="btn1" id="ImgBtn" onclick="modImgBtnClick()">변경</button>
+					</h4> 
 				</div>
 
+				<div style="width: 20%; margin:auto; height: 300px; margin-bottom: 20px;">
+				<form action="modImg" method="post" enctype="multipart/form-data" onsubmit="return modImgCheck()">
+				<input type="hidden" name="userId" value="${myInfo.userId }">
+				<input type="hidden" name="profile" value="${myInfo.userProfile }">
+					<img src="resources/profile/${myInfo.userProfile }" style="width: 100%; height: 100%;" id="userProfile">
+					<input type="file" style="display: none; margin-left: 20%;" id="modImgInput" name="mfile">
+					<input type="submit" class="btn1" value="등록" style="display: none; margin-left: 40%; margin-top: 20px;" id="modImgBtn">
+				</form>
+				</div>
 				
 			</c:if>
 			
@@ -112,11 +136,12 @@
 				if(pw.length < 6 || pw.length > 12){
 					$("#modBtn").attr("disabled","disabled")
 				}else{
-				$("#modBtn").removeAttr("disabled","")
+					$("#modBtn").removeAttr("disabled","")
 				}
 			})
 		})
 		
+		// 유효성 체크
 		function modInfo() {
 			var birth = $("#userBirth").val();
 			var addr = $("#userAddr").val();
@@ -124,6 +149,24 @@
 			if(birth == "" || addr == ""){
 				alert('생년월일 / 주소를 확인해주세요')
 				return false
+			}
+		}
+		
+		// 프로필사진 변경버튼 클릭시
+		function modImgBtnClick() {
+			$("#ImgBtn").css("display","none");
+			$("#modImgInput").css("display","");
+			$("#userProfile").css("display","none");
+			$("#modImgBtn").css("display","");
+		}
+		
+		// 사진변경 유효성 체크
+		function modImgCheck() {
+			var img = $("#modImgInput").val();
+			if(img == ""){
+				alert("사진을 등록해주세요!")
+				$("#modImgInput").focus();
+				return false;
 			}
 		}
 	</script>

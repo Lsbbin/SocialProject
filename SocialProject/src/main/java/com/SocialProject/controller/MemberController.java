@@ -62,4 +62,10 @@ public class MemberController {
 		mav = msvc.modInfo(mdto);
 		return mav;
 	}
+	// 프로필사진 변경
+	@RequestMapping("/modImg")
+	public ModelAndView modImg(MemberDTO mdto,@RequestParam("profile") String profile) throws IllegalStateException, IOException {
+		mav = msvc.modImg(mdto,profile);
+		return mav;
+	}
 }

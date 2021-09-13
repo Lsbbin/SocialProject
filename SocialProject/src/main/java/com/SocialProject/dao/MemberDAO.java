@@ -24,5 +24,8 @@ public interface MemberDAO {
 	// 회원정보 변경
 	@Update("UPDATE MEMBERS SET USERPW = #{userPw}, USERBIRTH = #{userBirth}, USERADDR = #{userAddr} WHERE USERID = #{userId}")
 	int modInfo(MemberDTO mdto);
+	// 프로필 사진 변경
+	@Update("UPDATE MEMBERS SET USERPROFILE = #{userProfile} WHERE USERID = #{userId}")
+	int modImg(MemberDTO mdto);
 	
 }
